@@ -82,7 +82,55 @@ Results are presented using tables and visualizations.
 
 ---
 
-## 📂 Project Structure
+## 📂 Projected Project Structure (Up for Change)
+```
+  Analysis-of-Algorithms-Project-3/
+├── src/
+│   ├── graph/
+│   │   ├── graph.py
+│   │   └── utils.py
+│   │
+│   ├── algorithms/
+│   │   ├── traversal/
+│   │   │   ├── bfs.py
+│   │   │   └── dfs.py
+│   │   │
+│   │   ├── shortest_path/
+│   │   │   ├── dijkstra.py
+│   │   │   └── bellman_ford.py
+│   │   │
+│   │   ├── mst/
+│   │   │   ├── prim.py
+│   │   │   └── kruskal.py
+│   │   │
+│   │   └── __init__.py
+│   │
+│   ├── models/
+│   │   └── dataset.py
+│   │
+│   └── __init__.py
+│
+├── analysis/
+│   ├── benchmark.py
+│   ├── complexity.md
+│   └── results.csv
+│
+├── data/
+│   ├── graph_small.json
+│   └── graph_large.json
+│
+├── docs/
+│   ├── report.md
+│   ├── Instructions-Project-3.pdf
+│   └── presentation.md
+│
+├── main.py
+├── .gitignore
+├── LICENSE
+├── requirements.txt
+├── .venv/
+└── README.md
+```
 
 ## Set up
 1. Create Python Virtual Environment
