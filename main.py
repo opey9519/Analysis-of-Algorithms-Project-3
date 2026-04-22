@@ -109,9 +109,15 @@ class SocialGraph:
                 f"{user1} -- {user2} | mutual friends: {mutuals} | cost: {cost:.3f}"
             )
 
+def kruskals():
+    pass
+
+
+
+
 def main():
     if __name__ == "__main__":
-    graph = SocialGraph()
+        graph = SocialGraph()
 
     # Add sample friendships
     graph.add_friendship("Alice", "Bob")
