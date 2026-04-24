@@ -257,7 +257,7 @@ class SocialGraph:
 
     def kruskal(self):
 
-        # sort all edges by cost, cheapest first (weakest mutual connection = lowest cost)
+        # sort all edges by cost, cheapest first (strongest mutual connection = lowest cost)
         edges = sorted(self.get_weighted_edges())
         users = self.get_users()
 
