@@ -255,5 +255,52 @@ class SocialGraph:
     # MST
     # Algorithm: Kruskal
 
-    def kruskal():
-        pass
+    def kruskal(self):
+
+        # sort all edges by cost, cheapest first (weakest mutual connection = lowest cost)
+        edges = sorted(self.get_weighted_edges())
+        users = self.get_users()
+
+        # union-find: each user starts as its own component
+        parent = {user: user for user in users}
+        rank = {user: 0 for user in users}
+
+        def find(x):
+            # path compression: flatten the tree on the way up to the root
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+
+        def union(x, y):
+            # merge the two components; return false if they're already connected
+            rx, ry = find(x), find(y)
+            if rx == ry:
+                return False
+            # union by rank: attach the shorter tree under the taller one
+            if rank[rx] < rank[ry]:
+                rx, ry = ry, rx
+            parent[ry] = rx
+            if rank[rx] == rank[ry]:
+                rank[rx] += 1
+            return True
+
+        mst = []
+        total_cost = 0.0
+
+        # greedily pick the cheapest edge that connects two different components
+        for cost, user1, user2, mutuals in edges:
+            if union(user1, user2):
+                mst.append((cost, user1, user2, mutuals))
+                total_cost += cost
+
+        return mst, total_cost
+
+    # print the mst edges and total cost in a readable format
+    def print_kruskal(self):
+
+        mst, total_cost = self.kruskal()
+
+        print("\nKruskal's MST (minimum spanning friendship tree):")
+        for cost, user1, user2, mutuals in mst:
+            print(f"  {user1} -- {user2} | mutual friends: {mutuals} | cost: {cost:.3f}")
+        print(f"Total MST cost: {total_cost:.3f}")

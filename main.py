@@ -1,6 +1,7 @@
 import graphs
 
 friendships = [
+    # Core cluster
     ("Alice", "Bob"),
     ("Alice", "Carol"),
     ("Bob", "Carol"),
@@ -10,6 +11,15 @@ friendships = [
     ("David", "Frank"),
     ("Eve", "Frank"),
     ("Carol", "David"),
+    # Extended network
+    ("Frank", "Grace"),
+    ("Eve", "Grace"),
+    ("Grace", "Henry"),
+    ("Henry", "Bob"),
+    ("Henry", "David"),
+    ("Ivan", "Henry"),
+    ("Ivan", "Alice"),
+    ("Ivan", "Carol"),
 ]
 
 
@@ -34,6 +44,9 @@ def main():
 
     # Breadth-First-Search
     graph.print_bfs("Alice")
+
+    # Kruskal's MST
+    graph.print_kruskal()
 
     return
 
