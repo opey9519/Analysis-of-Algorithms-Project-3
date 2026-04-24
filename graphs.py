@@ -1,13 +1,13 @@
 class SocialGraph:
     def __init__(self):
         self.friendships = {}
-       
+
     # Add a user to the graph if they do not already exist
     def add_user(self, user):
         if user not in self.friendships:
             self.friendships[user] = set()
 
-    # Add an undirected friendship edge between two users 
+    # Add an undirected friendship edge between two users
     # This relationship is mutual since it's a social friendship graph
     def add_friendship(self, user1, user2):
 
@@ -89,16 +89,83 @@ class SocialGraph:
             print(
                 f"{user1} -- {user2} | mutual friends: {mutuals} | cost: {cost:.3f}"
             )
-    #---------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------
     # Traversal
-    # Algorithm: BSF or DSF
+    # Algorithm: DFS
 
+    def dfs(self, start):
+        # Returns: order of vertices visited from start ("Alice")
+        if start not in self.friendships:
+            raise ValueError(
+                f"User '{start}' does not exist in the graph.")
 
-    #---------------------------------------------------------------------------------
+        visited = set()  # Track visited users
+        order = []  # Store traversal order
+
+        # DFS utility
+        def dfs_helper(user):
+            visited.add(user)
+            order.append(user)
+
+            # Recursively visits all unvisited neighbors
+            for neighbor in self.get_neighbors(user):
+                if neighbor not in visited:
+                    dfs_helper(neighbor)
+
+        dfs_helper(start)
+        return order
+
+    # Print dfs path result in a readable format.
+    def print_dfs(self, start):
+        if start is None:
+            print(f"No path exists from {start}")
+        else:
+            print("\nDFS Traversal starting from Alice:")
+            dfs_result = self.dfs(start)
+            print(" -> ".join(dfs_result))
+
+    # Algorithm: BFS
+
+    def bfs(self, start):
+
+        # Returns: order of vertices visited from start ("Alice")
+        if start not in self.friendships:
+            raise ValueError(
+                f"User '{start}' does not exist in the graph.")
+
+        visited = set()  # Track visited users
+        queue = [start]  # Use list as a queue
+        visited.add(start)
+
+        order = []  # Store traversal order
+
+        while queue:
+            user = queue.pop(0)  # Remove from front of queue (FIFO)
+            order.append(user)
+
+            # Visit neighbors in sorted order for consistent results
+            for neighbor in self.get_neighbors(user):
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    queue.append(neighbor)
+
+        return order
+
+    # Print bfs path result in a readable format
+    def print_bfs(self, start):
+        if start is None:
+            print(f"No path exists from {start}")
+        else:
+            print("\nBFS Traversal starting from Alice:")
+            bfs_result = self.bfs(start)
+            print(" -> ".join(bfs_result))
+
+    # ---------------------------------------------------------------------------------
     # Shortest Path
     # Algorithm: Bellman-Ford
 
     # Compute shortest paths from a source user using Bellman-Ford.
+
     def bellman_ford(self, source):
 
         # Returns:
@@ -108,7 +175,8 @@ class SocialGraph:
         # Note: Since friendships are undirected, each edge is relaxed in both directions
 
         if source not in self.friendships:
-            raise ValueError(f"Source user '{source}' does not exist in the graph.")
+            raise ValueError(
+                f"Source user '{source}' does not exist in the graph.")
 
         users = self.get_users()
 
@@ -152,11 +220,12 @@ class SocialGraph:
 
     # Return the shortest path and total cost from source to target using Bellman-Ford
     def shortest_path_bellman_ford(self, source, target):
-        
+
         distances, predecessors = self.bellman_ford(source)
 
         if target not in self.friendships:
-            raise ValueError(f"Target user '{target}' does not exist in the graph.")
+            raise ValueError(
+                f"Target user '{target}' does not exist in the graph.")
 
         if distances[target] == float("inf"):
             return None, float("inf")
@@ -182,8 +251,9 @@ class SocialGraph:
             print(f"\nBellman-Ford shortest path from {source} to {target}:")
             print(" -> ".join(path))
             print(f"Total path cost: {total_cost:.3f}")
-    #---------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------
     # MST
     # Algorithm: Kruskal
+
     def kruskal():
         pass
