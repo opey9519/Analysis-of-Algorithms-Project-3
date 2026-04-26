@@ -7,7 +7,6 @@ from analysis.benchmark import run_benchmarks
 from pathlib import Path
 
 
-
 friendships = [
     # Core cluster
     ("Alice", "Bob"),
@@ -64,14 +63,19 @@ def main():
     run_benchmarks()
 
     # Get shortest path for highlighting
-    shortest_path, total_cost = algo.shortest_path_bellman_ford("Alice", "Frank")
+    shortest_path, total_cost = algo.shortest_path_bellman_ford(
+        "Alice", "Frank")
 
     # Create data folder
     data_dir = Path("data")
     data_dir.mkdir(exist_ok=True)
 
     # Save social graph image inside data/
-    visualize.visualize_social_graph(graph, shortest_path=shortest_path, filename=data_dir / "social_graph.png")
+    visualize.visualize_social_graph(
+        graph,
+        shortest_path=shortest_path,
+        filename=str(data_dir / "social_graph.png"),
+    )
     return
 
 
