@@ -1,5 +1,5 @@
 # Analysis-of-Algorithms-Project-3
-Graph Algorithms in Network Optimization. A project exploring real-world problem modeling using graphs, with implementations of BFS/DFS, Dijkstra/Bellman-Ford, and Prim/Kruskal, along with complexity and performance analysis.
+Graph Algorithms in Network Optimization. A project exploring real-world problem modeling using graphs, with implementations of BFS/DFS, Bellman-Ford, and Kruskal, along with complexity and performance analysis.
 
 # Graph Algorithms in Network Optimization
 
@@ -10,50 +10,27 @@ Developed as part of the **Analysis of Algorithms** course.
 
 ---
 
-## 🎯 Objectives
-- Model a real-world problem using graph theory
-- Implement fundamental graph algorithms
-- Analyze time and space complexity
-- Compare algorithm performance under different conditions
-- Draw insights from experimental results
-
----
-
-## 🧠 Problem Formulation
-We model a real-world network optimization problem using a graph structure.
+## Problem Statement
+How can we model a social network using graph structures and apply graph algorithms to analyze user connectivity, relationship strength (measured by mutual connections), and optimal connections?
 
 ### Graph Representation
-- **Vertices:** Represent entities (e.g., cities, nodes, users, etc.)
-- **Edges:** Represent relationships or connections between vertices
+- **Vertices:** Individuals
+- **Edges:** Friendships between Individuals
 - **Graph Type:**  
-  - Directed / Undirected  
-  - Weighted / Unweighted  
+  - Undirected  
+  - Weighted
 
 ---
 
 ## 🏗️ Graph Construction
-- Graph contains **15–20+ vertices**
+- Graph contains **17 vertices**
 - Built using:
-  - Real-world dataset OR
   - Synthetic dataset designed for testing
-- Proper edge connections ensure meaningful structure
 
----
-
-## ⚙️ Algorithms Implemented
-
-### 🔍 Traversal Algorithms
-- Breadth-First Search (BFS) AND/OR Depth-First Search (DFS)
-
-### 🛣️ Shortest Path Algorithms
-- Dijkstra’s Algorithm AND/OR Bellman-Ford Algorithm  
-
-### 🌐 Minimum Spanning Tree (MST)
-- Prim’s Algorithm AND/OR Kruskal’s Algorithm  
 ---
 
 ## 📊 Complexity Analysis
-For each algorithm, we provide:
+For each algorithm, we provide in our report:
 - Pseudocode
 - Time Complexity
 - Space Complexity
@@ -63,15 +40,13 @@ For each algorithm, we provide:
 
 ## 🧪 Experimental Analysis
 
-We evaluate algorithms based on:
+We evaluate algorithms in our report based on:
 - Execution time
 - Memory usage / performance observations
 - Performance on:
   - Small vs large graphs
   - Sparse vs dense graphs
-
-Results are presented using tables and visualizations.
-
+  - 
 ---
 
 ## 💡 Discussion & Insights
@@ -86,29 +61,9 @@ Results are presented using tables and visualizations.
 ```
   Analysis-of-Algorithms-Project-3/
 ├── src/
-│   ├── graph/
-│   │   ├── graph.py
-│   │   └── utils.py
-│   │
-│   ├── algorithms/
-│   │   ├── traversal/
-│   │   │   ├── bfs.py
-│   │   │   └── dfs.py
-│   │   │
-│   │   ├── shortest_path/
-│   │   │   ├── dijkstra.py
-│   │   │   └── bellman_ford.py
-│   │   │
-│   │   ├── mst/
-│   │   │   ├── prim.py
-│   │   │   └── kruskal.py
-│   │   │
-│   │   └── __init__.py
-│   │
-│   ├── models/
-│   │   └── dataset.py
-│   │
-│   └── __init__.py
+│   ├── graph.py
+│   └── algorithms.py
+│   
 │
 ├── analysis/
 │   ├── benchmark.py
@@ -120,9 +75,9 @@ Results are presented using tables and visualizations.
 │   └── graph_large.json
 │
 ├── docs/
-│   ├── report.md
+│   ├── report.doc
 │   ├── Instructions-Project-3.pdf
-│   └── presentation.md
+│   └── presentation.ppt
 │
 ├── main.py
 ├── .gitignore
