@@ -1,3 +1,4 @@
+# SocialGraph - Contains graph-related methods
 class SocialGraph:
     def __init__(self):
         self.friendships = {}
@@ -89,13 +90,20 @@ class SocialGraph:
             print(
                 f"{user1} -- {user2} | mutual friends: {mutuals} | cost: {cost:.3f}"
             )
+
+# Algorithms - Contains algorithm-related methods
+
+
+class Algorithms:
+    def __init__(self, graph):
+        self.graph = graph
     # ---------------------------------------------------------------------------------
     # Traversal
     # Algorithm: DFS
 
     def dfs(self, start):
         # Returns: order of vertices visited from start ("Alice")
-        if start not in self.friendships:
+        if start not in self.graph.friendships:
             raise ValueError(
                 f"User '{start}' does not exist in the graph.")
 
@@ -108,7 +116,7 @@ class SocialGraph:
             order.append(user)
 
             # Recursively visits all unvisited neighbors
-            for neighbor in self.get_neighbors(user):
+            for neighbor in self.graph.get_neighbors(user):
                 if neighbor not in visited:
                     dfs_helper(neighbor)
 
@@ -129,7 +137,7 @@ class SocialGraph:
     def bfs(self, start):
 
         # Returns: order of vertices visited from start ("Alice")
-        if start not in self.friendships:
+        if start not in self.graph.friendships:
             raise ValueError(
                 f"User '{start}' does not exist in the graph.")
 
@@ -144,7 +152,7 @@ class SocialGraph:
             order.append(user)
 
             # Visit neighbors in sorted order for consistent results
-            for neighbor in self.get_neighbors(user):
+            for neighbor in self.graph.get_neighbors(user):
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
@@ -174,11 +182,11 @@ class SocialGraph:
 
         # Note: Since friendships are undirected, each edge is relaxed in both directions
 
-        if source not in self.friendships:
+        if source not in self.graph.friendships:
             raise ValueError(
                 f"Source user '{source}' does not exist in the graph.")
 
-        users = self.get_users()
+        users = self.graph.get_users()
 
         # Step 1: initialize distances
         distances = {user: float("inf") for user in users}
@@ -186,7 +194,7 @@ class SocialGraph:
         distances[source] = 0
 
         # Step 2: get all weighted undirected edges once
-        edges = self.get_weighted_edges()
+        edges = self.graph.get_weighted_edges()
 
         # Step 3: relax all edges |V| - 1 times
         for _ in range(len(users) - 1):
@@ -223,7 +231,7 @@ class SocialGraph:
 
         distances, predecessors = self.bellman_ford(source)
 
-        if target not in self.friendships:
+        if target not in self.graph.friendships:
             raise ValueError(
                 f"Target user '{target}' does not exist in the graph.")
 
@@ -258,8 +266,8 @@ class SocialGraph:
     def kruskal(self):
 
         # sort all edges by cost, cheapest first (strongest mutual connection = lowest cost)
-        edges = sorted(self.get_weighted_edges())
-        users = self.get_users()
+        edges = sorted(self.graph.get_weighted_edges())
+        users = self.graph.get_users()
 
         # union-find: each user starts as its own component
         parent = {user: user for user in users}
@@ -302,5 +310,6 @@ class SocialGraph:
 
         print("\nKruskal's MST (minimum spanning friendship tree):")
         for cost, user1, user2, mutuals in mst:
-            print(f"  {user1} -- {user2} | mutual friends: {mutuals} | cost: {cost:.3f}")
+            print(
+                f"  {user1} -- {user2} | mutual friends: {mutuals} | cost: {cost:.3f}")
         print(f"Total MST cost: {total_cost:.3f}")
