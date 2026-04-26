@@ -1,5 +1,5 @@
 # Analysis-of-Algorithms-Project-3
-Graph Algorithms in Network Optimization. A project exploring real-world problem modeling using graphs, with implementations of BFS/DFS, Bellman-Ford, and Kruskal, along with complexity and performance analysis.
+Graph Algorithms in Network Optimization. A project exploring real-world problem modeling using graphs, with implementations of **BFS/DFS**, **Bellman-Ford**, and **Kruskal**, along with complexity and performance analysis.
 
 # Graph Algorithms in Network Optimization
 
