@@ -1,4 +1,5 @@
-import graphs
+import src.graphs as graphs
+import src.algorithms as algorithms
 
 friendships = [
     # Core cluster
@@ -24,11 +25,15 @@ friendships = [
 
 
 def main():
+    # Graph-related methods and properties
     graph = graphs.SocialGraph()
 
     # Add sample friendships
     for f in friendships:
         graph.add_friendship(f[0], f[1])
+
+    # Algorithm-related methods
+    algo = algorithms.Algorithms(graph)
 
     # View the basic graph
     graph.print_graph()
@@ -37,16 +42,16 @@ def main():
     graph.print_weighted_edges()
 
     # Bellman-Ford shortest path example
-    graph.print_bellman_ford_result("Alice", "Frank")
+    algo.print_bellman_ford_result("Alice", "Frank")
 
     # Depth-First-Search
-    graph.print_dfs("Alice")
+    algo.print_dfs("Alice")
 
     # Breadth-First-Search
-    graph.print_bfs("Alice")
+    algo.print_bfs("Alice")
 
     # Kruskal's MST
-    graph.print_kruskal()
+    algo.print_kruskal()
 
     return
 
