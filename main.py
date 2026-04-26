@@ -1,4 +1,5 @@
-import graphs
+import src.graphs as graphs
+import src.algorithms as algorithms
 
 friendships = [
     # Core cluster
@@ -32,7 +33,7 @@ def main():
         graph.add_friendship(f[0], f[1])
 
     # Algorithm-related methods
-    algo = graphs.Algorithms(graph)
+    algo = algorithms.Algorithms(graph)
 
     # View the basic graph
     graph.print_graph()
