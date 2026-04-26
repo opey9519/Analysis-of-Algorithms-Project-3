@@ -1,36 +1,30 @@
-
-"""
-It compares:
-- DFS
-- BFS
-- Bellman-Ford
-- Kruskal
-
-It produces:
-- Console results table
-- benchmark_results.csv
-- benchmark_execution_time.png
-- benchmark_memory_usage.png
-"""
-
 import random
 import time
 import tracemalloc
 import csv
+import sys
+from pathlib import Path
 
 import matplotlib.pyplot as plt
 
-import src.graphs as graphs
-import src.algorithms as algorithms
+# Allow this file to import from project-level src/
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src import graphs
+from src import algorithms
+
+
+DATA_DIR = PROJECT_ROOT / "data"
 
 
 def generate_social_graph(num_users, density):
-    """
-    Generate a synthetic undirected social graph.
 
-    num_users = number of vertices
-    density = probability of an edge between two users
-    """
+    # Generate a synthetic undirected social graph.
+
+    # num_users = number of vertices
+    # density = probability of an edge between two users
+
     graph = graphs.SocialGraph()
     users = [f"User{i}" for i in range(num_users)]
 
@@ -42,7 +36,7 @@ def generate_social_graph(num_users, density):
             if random.random() < density:
                 graph.add_friendship(users[i], users[j])
 
-    # Force at least one connected chain so all algorithms have usable input
+    # Force at least one connected chain so paths always exist
     for i in range(num_users - 1):
         graph.add_friendship(users[i], users[i + 1])
 
@@ -51,7 +45,7 @@ def generate_social_graph(num_users, density):
 
 def measure_algorithm(algorithm_name, function):
 
-    # Measure execution time and peak memory usage for one algorithm call.
+    # Measure execution time and peak memory usage for one algorithm call
 
     tracemalloc.start()
 
@@ -71,7 +65,7 @@ def measure_algorithm(algorithm_name, function):
 
 def run_single_experiment(graph_label, graph, source, target):
 
-    # Run DFS, BFS, Bellman-Ford, and Kruskal on one graph.
+    # Run DFS, BFS, Bellman-Ford, and Kruskal on one graph
 
     algo = algorithms.Algorithms(graph)
 
@@ -100,7 +94,7 @@ def run_single_experiment(graph_label, graph, source, target):
 
 def print_results_table(results):
 
-    # Print all benchmark results in a readable console table.
+    # Print benchmark results in a readable console table
 
     print("\nBenchmark Results")
     print("=" * 105)
@@ -127,10 +121,10 @@ def print_results_table(results):
     print("=" * 105)
 
 
-def save_results_csv(results, filename="benchmark_results.csv"):
-    """
-    Save benchmark results to a CSV file for the report.
-    """
+def save_results_csv(results, filename):
+
+    # Save benchmark results to a CSV file
+
     fieldnames = [
         "Graph Type",
         "Algorithm",
@@ -145,12 +139,12 @@ def save_results_csv(results, filename="benchmark_results.csv"):
         writer.writeheader()
         writer.writerows(results)
 
-    print(f"\nCSV results saved as: {filename}")
+    print(f"CSV results saved as: {filename}")
 
 
 def create_bar_chart(results, metric, filename, title, y_label):
 
-    # Create a grouped bar chart for either execution time or memory usage.
+    # Create a bar chart for either execution time or memory usage
 
     labels = [f"{row['Graph Type']}\n{row['Algorithm']}" for row in results]
     values = [row[metric] for row in results]
@@ -167,8 +161,12 @@ def create_bar_chart(results, metric, filename, title, y_label):
     print(f"Graph saved as: {filename}")
 
 
-def main():
+def run_benchmarks():
+
     random.seed(42)
+
+    # Create data folder if it does not exist
+    DATA_DIR.mkdir(exist_ok=True)
 
     experiments = [
         # graph label, number of users, density
@@ -186,17 +184,26 @@ def main():
         source = "User0"
         target = f"User{num_users - 1}"
 
-        experiment_results = run_single_experiment(graph_label, graph, source, target)
+        experiment_results = run_single_experiment(
+            graph_label,
+            graph,
+            source,
+            target
+        )
 
         all_results.extend(experiment_results)
 
     print_results_table(all_results)
-    save_results_csv(all_results)
+
+    save_results_csv(
+        all_results,
+        DATA_DIR / "benchmark_results.csv"
+    )
 
     create_bar_chart(
         all_results,
         metric="Execution Time (seconds)",
-        filename="benchmark_execution_time.png",
+        filename=DATA_DIR / "benchmark_execution_time.png",
         title="Algorithm Execution Time Comparison",
         y_label="Execution Time (seconds)"
     )
@@ -204,14 +211,14 @@ def main():
     create_bar_chart(
         all_results,
         metric="Peak Memory (KB)",
-        filename="benchmark_memory_usage.png",
+        filename=DATA_DIR / "benchmark_memory_usage.png",
         title="Algorithm Memory Usage Comparison",
         y_label="Peak Memory (KB)"
     )
 
     print("\nBenchmark complete.")
-    print("Use the CSV table and PNG graphs in your report or PowerPoint.")
+    print(f"All benchmark files saved inside: {DATA_DIR}")
 
 
 if __name__ == "__main__":
-    main()
+    run_benchmarks()

@@ -41,7 +41,7 @@ class SocialGraph:
 
         return self.mutual_friends_count(user1, user2)
 
-    # Convert strength into algorithm-friendly cost.
+    # Convert strength into algorithm-friendly cost
     # Lower cost means a stronger connection.
     def friendship_cost(self, user1, user2):
 
@@ -75,14 +75,14 @@ class SocialGraph:
 
         return edges
 
-    # Print the graph in a readable way for debugging.
+    # Print the graph in a readable way for debugging
     def print_graph(self):
 
         print("Users and their direct friends:")
         for user in sorted(self.friendships):
             print(f"{user}: {sorted(self.friendships[user])}")
 
-    # Print all edges with their mutual-friend strength and cost.
+    # Print all edges with their mutual-friend strength and cost
     def print_weighted_edges(self):
 
         print("\nWeighted friendship edges:")

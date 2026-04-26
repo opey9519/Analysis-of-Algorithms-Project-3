@@ -79,7 +79,7 @@ class Algorithms:
     # Shortest Path
     # Algorithm: Bellman-Ford
 
-    # Compute shortest paths from a source user using Bellman-Ford.
+    # Compute shortest paths from a source user using Bellman-Ford
 
     def bellman_ford(self, source):
 
@@ -155,7 +155,7 @@ class Algorithms:
         path.reverse()
         return path, distances[target]
 
-    # Print the shortest path result in a readable format.
+    # Print the shortest path result in a readable format
     def print_bellman_ford_result(self, source, target):
 
         path, total_cost = self.shortest_path_bellman_ford(source, target)
