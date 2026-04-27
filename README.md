@@ -84,13 +84,15 @@ We evaluate algorithms in our report based on:
 │   └── results.csv
 │
 ├── data/
-│   ├── graph_small.json
-│   └── graph_large.json
+│   ├── benchmark_execution_time.png
+│   ├── benchmark_memory_usage.png
+│   ├── benchmark_results.csv
+│   └── social_graph.png
 │
 ├── docs/
-│   ├── report.doc
+│   ├── COT4400-Final-Project-Report.pdf
 │   ├── Instructions-Project-3.pdf
-│   └── presentation.ppt
+│   └── COT440-Final-Presentation.ppt
 │
 ├── main.py
 ├── .gitignore
