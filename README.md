@@ -110,6 +110,10 @@ We evaluate algorithms in our report based on:
    ```
      source .venv/bin/activate
    ```
+3. Install Dependencies
+   ```
+     pip install -r requirements.txt
+   ```
 
 ## Run
 
